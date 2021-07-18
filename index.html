@@ -8,17 +8,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="style.css">
-    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">    
     <title>Jokenpo!</title>
 </head>
 <body>
+
     <main>
-        <h3>Escolha uma opção</h3>
-        <div class="bttnsContainer">
-           <button>Pedra</button>
-           <button>Papel</button>
-           <button>Tesoura</button>
-        </div>
+
+        <section class="playerContainer">
+
+            <h3 class="containersTitle">Escolha uma opção:</h3>
+            <div id="bttns-list" class="bttnsContainer">
+                <button id="pedraBttn">Pedra</button>
+                <button id="papelBttn">Papel</button>
+                <button id="tesouraBttn">Tesoura</button>
+            </div>
+
+        </section>
+
+        <section class="pcContainer">
+
+            <h3 class="containersTitle">O computador escolheu:</h3>
+            <div id="pcChoice" class="pc"></div>
+            <div id=result></div>
+            
+        </section>
+       
     </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
