@@ -1,15 +1,18 @@
 //  const pedra = document.getElementById("pedraBttn");
 //  pedra.dataset.buttonNum ="1"
 const playerBttns = document.querySelectorAll("#bttns-list > button");
-console.log(playerBttns);
+// console.log(playerBttns);
 let playerBttnsArr = [...playerBttns];
-console.log(playerBttnsArr);
+// console.log(playerBttnsArr);
 
 
 const pcChoice = document.getElementById("pcChoice");
 let pcPlay = Math.floor(Math.random()*3);
 console.log(pcPlay);
 let pcOption = 0;
+
+
+const resultContainer = document.getElementById("result");
 
 
 function pcString(){
@@ -20,60 +23,122 @@ function pcString(){
         pcOption = 'Papel'
     }
     if(pcPlay === 2){
-        pcOption = 'Pesoura'
+        pcOption = 'Tesoura'
     }
     return pcOption;
 }
 
-let matchCombination = [];
-let combination = [];
-
-const resultContainer = document.getElementById("result");
-
-const winingCombinations = [
-    [0,2],
-    [1,0],
-    [2,1]
-]
-
-for(let cont = 0; cont < playerBttnsArr.length; cont++){
-   
-    let bttn = playerBttnsArr[cont];
-   
-    bttn.dataset.buttonId = cont;
-    console.log(bttn);
-
-    bttn.addEventListener('click', getMatch);
-}
-
-
-
+// FUNÇÃO DO BLOCO DA PERDIÇÃO
+// function equalArr(matchArr, winArr){
+//     let cont = 0;
+//     for(let i = 0; i < 2; i++){
+//         if(matchArr[i] === winArr[i]){
+//             cont++
+//         }
+//         else{
+//             return false;
+//         }     
+//     }
+//     if(cont === 2){
+//         return true;
+//     }
+// }
 
 function getMatch(evento){
     pcChoice.innerHTML = pcString();
 
         let buttonData = evento.target.getAttribute('data-button-id');
-        console.log(buttonData)
-        let buttonDataNum = parseInt(buttonData);
+      
+        buttonData = Number(buttonData);
+        // console.log(buttonData)
 
-        matchCombination.push(buttonDataNum, pcPlay)
-        console.log(matchCombination);
+        if(buttonData === pcPlay){
+                resultContainer.innerHTML = "Empate!";
 
-        for(row = 0; row < winingCombinations.length; row++){
-           combination = winingCombinations[row];
-            console.log(winingCombinations[row])
-            
-            if(matchCombination === combination[row]){
-                resultContainer.innerHTML = "Você venceu!";
+                pcChoice.classList.remove("winBackground","loseBackground");
+                pcChoice.classList.add("drawBackground"); 
             }
-        }
+
+        //PEDRA 
+        if(buttonData === 0 && pcPlay === 2){
+            resultContainer.innerHTML = "Você Venceu!";
+
+            pcChoice.classList.remove("drawBackground","loseBackground");
+            pcChoice.classList.add("winBackground");        
+        }    
+        if(buttonData === 0 && pcPlay === 1){
+            resultContainer.innerHTML = "Você Perdeu!";
+
+            pcChoice.classList.remove("drawBackground","winBackground");
+            pcChoice.classList.add("loseBackground"); 
+        } 
+        //PAPEL
+        if(buttonData === 1 && pcPlay === 0){
+            resultContainer.innerHTML = "Você Venceu!";  
+
+            pcChoice.classList.remove("drawBackground","loseBackground");
+            pcChoice.classList.add("winBackground");      
+        }    
+        if(buttonData === 1 && pcPlay === 2){
+            resultContainer.innerHTML = "Você Perdeu!";
+
+            pcChoice.classList.remove("drawBackground","winBackground");
+            pcChoice.classList.add("loseBackground"); 
+        } 
+        //TESOURA
+        if(buttonData === 2 && pcPlay === 1){
+            resultContainer.innerHTML = "Você Venceu!";  
+
+            pcChoice.classList.remove("drawBackground","loseBackground");
+            pcChoice.classList.add("winBackground");      
+        }    
+        if(buttonData === 2 && pcPlay === 0){
+            resultContainer.innerHTML = "Você Perdeu!";
+            pcChoice.classList.remove("drawBackground","winBackground");
+            pcChoice.classList.add("loseBackground"); 
+        } 
+
+
+        //BLOCO DA PERDIÇÃO
+        // let matchCombination = [];
+        // let combination = [];
+
+        // matchCombination.push(buttonData, pcPlay)
+        // console.log(matchCombination);
+
+        // const winingCombinations = [
+        //     [0,2],
+        //     [1,0],
+        //     [2,1]
+        // ]
+
+        // for(let i = 0; i < winingCombinations.length; i++){
+        //     combination = winingCombinations[i];
+        //     let itsWin = equalArr(matchCombination, combination);
+        //     console.log(combination);
+            
+            
+        //     if( itsWin === true){
+        //         resultContainer.innerHTML = "Você Venceu!";
+                
+        //     }
+        //     if( itsWin === false){
+        //         resultContainer.innerHTML = "Vocẽ Perdeu!"
+        //     }
+        //     console.log(itsWin);
+        // }
+        // if(buttonData === pcPlay){
+        //     resultContainer.innerHTML = "Empate!";
+        // }
         
-        if(buttonDataNum === pcPlay){
-            resultContainer.innerHTML = "Empate!";
-        }
-
-
     }
 
-
+    for(let cont = 0; cont < playerBttnsArr.length; cont++){
+        let bttn = playerBttnsArr[cont];
+       
+        bttn.dataset.buttonId = cont;
+        // console.log(bttn);
+    
+        bttn.addEventListener('click', getMatch);
+    }
 
