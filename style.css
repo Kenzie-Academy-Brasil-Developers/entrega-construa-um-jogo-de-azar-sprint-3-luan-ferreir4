@@ -7,10 +7,10 @@
     --color-secundary: #c4c4c4;
     --color-bg-buttonActivated: #fff;
     --colo-font-primary: #272727;
-    --color-details: #cd5c5c;
-    --color-datails-secundary: #000;
+    --color-details: #c9c75c;
+    --color-details-secundary: #000;
     --color-win: #48f874;
-    
+    --color-lose: #cd5c5c;
 }
 
 body{
@@ -20,33 +20,27 @@ body{
     font-size: 1.5rem;
 }
 
+.hidden{
+    display: none;
+}
 .highContainer{
     width: 100vw;
     text-align: center;
 }
 
-main button:hover{
-    cursor: pointer;
-    background-color: var(--color-bg-buttonActivated);
-}
-main button:active{
-    background-color: var(--color-details);
-
-    transform: translateY(6px);
-    box-shadow: 0 2px 0 var(--color-datails-secundary);    
-}
-.containersTitle{
-    font-weight: var(--font-bold);
-    margin: 0;
-}
-.Container{
+.container{
     width: 95vw;
     margin: 30px auto;
     text-align: center;
     
 }
 
-.bttnsContainer button{
+.containerTitle{
+    font-weight: var(--font-bold);
+    margin: 0;
+}
+
+.bttnsStyle{
     font-weight: var(--font-light);
     font-size: 1.3rem;
     margin: 15px auto;
@@ -59,6 +53,16 @@ main button:active{
     box-shadow: 0 8px 0 #000;
 }
 
+.bttnsStyle:hover{
+    cursor: pointer;
+    background-color: var(--color-bg-buttonActivated);
+}
+.bttnsStyle:active{
+    background-color: var(--color-details);
+
+    transform: translateY(6px);
+    box-shadow: 0 2px 0 var(--color-datails-secundary);    
+}
 
 .pc{
     padding: 15px 10px;
@@ -70,19 +74,25 @@ main button:active{
     background-color: var(--color-secundary);
     border: 1px solid #000;
     border-radius: 20px;
-    
-}
-.drawBackground{
-    background-color: var(--color-bg-buttonActivated);
-}
-.winBackground{
-    background-color: #48f874;
-}
-.loseBackground{
-    background-color: var(--color-details);
 }
 
-.rContainer{
+.resetContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.drawBackground{
+    background-color: var(--color-details);
+}
+.winBackground{
+    background-color: var(--color-win);
+}
+.loseBackground{
+    background-color: var(--color-lose);
+}
+
+.container--result{
     margin-bottom: 20px;
 }
 
