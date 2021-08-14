@@ -6,7 +6,7 @@
     --color-primary: #8aca8a;
     --color-secundary: #c4c4c4;
     --color-bg-buttonActivated: #fff;
-    --colo-font-primary: #272727;
+    --color-font-primary: #272727;
     --color-details: #c9c75c;
     --color-details-secundary: #000;
     --color-win: #48f874;
@@ -15,11 +15,14 @@
 
 body{
     background-color:var(--color-primary);
-    color: var(--colo-font-primary);
+    color: var(--color-font-primary);
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1.5rem;
 }
-
+.highContainer__title{
+    max-width: 250px;
+    margin: 40px auto;
+}
 .hidden{
     display: none;
 }
@@ -46,22 +49,28 @@ body{
     margin: 15px auto;
     padding: 10px 15px;
     
-    background-color: #c4c4c4;
-    border: 1px solid #000;
+    background-color: var(--color-secundary);
+    border: 1px solid var(--color-details-secundary);
     border-radius: 18px;
 
-    box-shadow: 0 8px 0 #000;
+    box-shadow: 0 8px 0 var(--color-details-secundary);
 }
 
 .bttnsStyle:hover{
     cursor: pointer;
     background-color: var(--color-bg-buttonActivated);
 }
-.bttnsStyle:active{
-    background-color: var(--color-details);
+
+.bttnsStyle--player:focus{
+    background-color: var(--color-bg-buttonActivated);
 
     transform: translateY(6px);
     box-shadow: 0 2px 0 var(--color-datails-secundary);    
+}
+
+.bttnsStyle--reset:active{
+    transform: translateY(6px);
+    box-shadow: 0 2px 0 var(--color-datails-secundary)
 }
 
 .pc{
@@ -77,21 +86,23 @@ body{
 }
 
 .resetContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
+}
+i{
+    font-size: 1rem;
+    opacity: 0.8;
 }
 
-.drawBackground{
-    background-color: var(--color-details);
-}
+
 .winBackground{
     background-color: var(--color-win);
 }
 .loseBackground{
     background-color: var(--color-lose);
 }
-
+.drawBackground{
+    background-color: var(--color-details);
+}
 .container--result{
     margin-bottom: 20px;
 }
@@ -112,10 +123,14 @@ body{
 }
 
 @media (min-width: 800px) {
+    .highContainer__title{
+    max-width: 250px;
+    margin: 40px auto;
+    }
     .flex{
         display: flex;
         justify-content: center;
-        
+        align-items: flex-start;
     }
     .bttnsContainer{
         margin-top: 19px;

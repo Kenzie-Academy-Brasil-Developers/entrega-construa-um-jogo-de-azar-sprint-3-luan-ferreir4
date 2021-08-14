@@ -5,22 +5,26 @@ const pcChoice = document.getElementById("pcChoice");
 let pcPlay = Math.floor(Math.random()*3);
 console.log(pcPlay);
 
-let pcOption = '';
-
 const resultContainer = document.getElementById("result");
+
+let containerReset = document.getElementById("containerReset");
+
+const resetBtn = document.getElementById('resetBtn');
 
 const getBttns = () => {
     for(let cont = 0; cont < playerBttns.length; cont++){
         let bttn = playerBttns[cont];
        
         bttn.dataset.buttonId = cont;
-        // console.log(bttn);
     
-        bttn.addEventListener('click', getMatch);
+            bttn.addEventListener('click', getMatch);
+        
     }
 }
 
 const pcChoiceToString = (pc) => {
+    let pcOption = '';
+
     if(pc === 0){
         pcOption = 'Pedra'
     }
@@ -33,112 +37,88 @@ const pcChoiceToString = (pc) => {
     return pcOption;
 }
 
-// FUNÇÃO DO BLOCO DA PERDIÇÃO
-// function equalArr(matchArr, winArr){
-//     let cont = 0;
-//     for(let i = 0; i < 2; i++){
-//         if(matchArr[i] === winArr[i]){
-//             cont++
-//         }
-//         else{
-//             return false;
-//         }     
-//     }
-//     if(cont === 2){
-//         return true;
-//     }
-// }
+const compareChoices = (player , pc) => {
+    let gameMsg = '';
+    let pcChoiceClass = '';
 
-function getMatch(evento){
+    if(player === pc){
+        gameMsg = "Empate!";
+
+        pcChoiceClass = ("drawBackground"); 
+    }
+
+    if(player === 0 && pc === 2){
+        gameMsg = "Você Venceu!";
+
+        pcChoiceClass = ("winBackground");        
+    }    
+    if(player === 0 && pc === 1){
+        gameMsg = "Você Perdeu!";
+
+        pcChoiceClass = ("loseBackground"); 
+    } 
+
+    if(player === 1 && pc === 0){
+        gameMsg = "Você Venceu!";  
+
+        pcChoiceClass = "winBackground";      
+    }    
+    if(player === 1 && pc === 2){
+        gameMsg = "Você Perdeu!";
+
+        pcChoiceClass = "loseBackground"; 
+    } 
+
+    if(player === 2 && pc === 1){
+        gameMsg = "Você Venceu!";  
+
+        pcChoiceClass = "winBackground";      
+    }    
+    if(player === 2 && pc === 0){
+        gameMsg = "Você Perdeu!";
+
+        pcChoiceClass = "loseBackground"; 
+    } 
+    pcChoice.classList.add(pcChoiceClass);
+    
+    return gameMsg;
+}
+
+
+const getMatch = (event) => {
     pcChoice.innerHTML = pcChoiceToString(pcPlay);
 
-        let buttonData = evento.target.getAttribute('data-button-id');
+        let buttonData = event.target.getAttribute('data-button-id');
       
         buttonData = Number(buttonData);
         console.log(buttonData)
 
-        resultContainer.innerHTML = compareChoices(buttonData, pcPlay);
-        
+            resultContainer.innerHTML = compareChoices(buttonData, pcPlay);
+         
+            appearReset();  
+}
 
+const appearReset = () => {
+    let appear = setTimeout(()=> {
+        containerReset.classList.replace("hidden", "resetContainer");
+    }, 1200); 
 
-        //BLOCO DA PERDIÇÃO
-        // let matchCombination = [];
-        // let combination = [];
+    return appear;
+}
 
-        // matchCombination.push(buttonData, pcPlay)
-        // console.log(matchCombination);
+const resetGame = () => {
+    pcPlay = Math.floor(Math.random()*3);
+    console.log(pcPlay);
 
-        // const winingCombinations = [
-        //     [0,2],
-        //     [1,0],
-        //     [2,1]
-        // ]
+    pcChoice.innerHTML = '';
 
-        // for(let i = 0; i < winingCombinations.length; i++){
-        //     combination = winingCombinations[i];
-        //     let itsWin = equalArr(matchCombination, combination);
-        //     console.log(combination);
-            
-            
-        //     if( itsWin === true){
-        //         resultContainer.innerHTML = "Você Venceu!";
-                
-        //     }
-        //     if( itsWin === false){
-        //         resultContainer.innerHTML = "Vocẽ Perdeu!"
-        //     }
-        //     console.log(itsWin);
-        // }
-        // if(buttonData === pcPlay){
-        //     resultContainer.innerHTML = "Empate!";
-        // }
-        
+    let backGroundClass = pcChoice.classList[1];
+    if(backGroundClass !== undefined){
+        pcChoice.classList.remove(backGroundClass)
     }
+    resultContainer.innerHTML = '';
 
-    const compareChoices = ( player , pc) => {
-        let gameMsg = ''
-    //EMPATE
-        if(player === pc){
-            gameMsg = "Empate!";
-
-            pcChoice.classList.add("drawBackground"); 
-        }
-
-    //PEDRA 
-        if(player === 0 && pc === 2){
-            gameMsg = "Você Venceu!";
-
-            pcChoice.classList.add("winBackground");        
-        }    
-        if(player === 0 && pc === 1){
-            gameMsg = "Você Perdeu!";
-
-            pcChoice.classList.add("loseBackground"); 
-        } 
-    //PAPEL
-        if(player === 1 && pc === 0){
-            gameMsg = "Você Venceu!";  
-
-            pcChoice.classList.add("winBackground");      
-        }    
-        if(player === 1 && pc === 2){
-            gameMsg = "Você Perdeu!";
-
-            pcChoice.classList.add("loseBackground"); 
-        } 
-    //TESOURA
-        if(player === 2 && pc === 1){
-            gameMsg = "Você Venceu!";  
-
-            pcChoice.classList.add("winBackground");      
-        }    
-        if(player === 2 && pc === 0){
-            gameMsg = "Você Perdeu!";
-    
-            pcChoice.classList.add("loseBackground"); 
-        } 
-
-        return gameMsg;
-    }
-    getBttns();
-
+    containerReset.classList.replace("resetContainer","hidden");
+}
+resetBtn.addEventListener('click', resetGame);
+getBttns();
