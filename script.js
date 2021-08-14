@@ -114,7 +114,7 @@ const appearReset = () => {
 const removeActiveButton = () => {
    return playerBttns.map(element => {
         let activeClass = element.classList[2];
-        console.log(activeClass)
+
         if(activeClass !== undefined){
             element.classList.remove(activeClass);
         }
@@ -130,7 +130,6 @@ const removeBackgroundColor = () => {
 
 const resetGame = () => {
     pcPlay = Math.floor(Math.random()*3);
-    console.log(pcPlay);
 
     pcChoice.innerHTML = '';
     resultContainer.innerHTML = '';
