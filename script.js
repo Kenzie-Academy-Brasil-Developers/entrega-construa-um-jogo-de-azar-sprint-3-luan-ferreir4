@@ -84,18 +84,23 @@ const compareChoices = (player , pc) => {
 
 
 const getMatch = (event) => {
-    pcChoice.innerHTML = pcChoiceToString(pcPlay);
-        let button = event.target;
-        let buttonData = event.target.getAttribute('data-button-id');
-      
-        buttonData = Number(buttonData);
+            let button = event.target;
+            let buttonData = event.target.getAttribute('data-button-id');
+        
+            buttonData = Number(buttonData);
 
-        if(resultContainer.innerHTML === ''){
-            button.classList.add('bttnsStylefocus')
-            resultContainer.innerHTML = compareChoices(buttonData, pcPlay);
-         
-            appearReset();
-        }   
+            if(resultContainer.innerHTML === ''){
+                button.classList.add('bttnsStylefocus')
+
+                setTimeout(() => {
+                    pcChoice.innerHTML = pcChoiceToString(pcPlay);
+
+                    resultContainer.innerHTML = compareChoices(buttonData, pcPlay);
+                },500)
+
+                appearReset();
+            }   
+    
 }
 
 const appearReset = () => {
