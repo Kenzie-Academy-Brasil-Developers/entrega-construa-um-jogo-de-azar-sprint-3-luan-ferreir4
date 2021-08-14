@@ -3,7 +3,6 @@ playerBttns = [...playerBttns];
 
 const pcChoice = document.getElementById("pcChoice");
 let pcPlay = Math.floor(Math.random()*3);
-console.log(pcPlay);
 
 const resultContainer = document.getElementById("result");
 
@@ -16,9 +15,8 @@ const getBttns = () => {
         let bttn = playerBttns[cont];
        
         bttn.dataset.buttonId = cont;
-    
-            bttn.addEventListener('click', getMatch);
         
+        bttn.addEventListener('click', getMatch);
     }
 }
 
@@ -87,15 +85,17 @@ const compareChoices = (player , pc) => {
 
 const getMatch = (event) => {
     pcChoice.innerHTML = pcChoiceToString(pcPlay);
-
+        let button = event.target;
         let buttonData = event.target.getAttribute('data-button-id');
       
         buttonData = Number(buttonData);
-        console.log(buttonData)
 
+        if(resultContainer.innerHTML === ''){
+            button.classList.add('bttnsStylefocus')
             resultContainer.innerHTML = compareChoices(buttonData, pcPlay);
          
-            appearReset();  
+            appearReset();
+        }   
 }
 
 const appearReset = () => {
@@ -106,19 +106,36 @@ const appearReset = () => {
     return appear;
 }
 
+const removeActiveButton = () => {
+   return playerBttns.map(element => {
+        let activeClass = element.classList[2];
+        console.log(activeClass)
+        if(activeClass !== undefined){
+            element.classList.remove(activeClass);
+        }
+    });
+}
+
+const removeBackgroundColor = () => {
+    let backGroundClass = pcChoice.classList[1];
+    if(backGroundClass !== undefined){
+       return pcChoice.classList.remove(backGroundClass)
+    }
+}
+
 const resetGame = () => {
     pcPlay = Math.floor(Math.random()*3);
     console.log(pcPlay);
 
     pcChoice.innerHTML = '';
-
-    let backGroundClass = pcChoice.classList[1];
-    if(backGroundClass !== undefined){
-        pcChoice.classList.remove(backGroundClass)
-    }
     resultContainer.innerHTML = '';
+
+    removeBackgroundColor();
+
+    removeActiveButton();
 
     containerReset.classList.replace("resetContainer","hidden");
 }
+
 resetBtn.addEventListener('click', resetGame);
 getBttns();

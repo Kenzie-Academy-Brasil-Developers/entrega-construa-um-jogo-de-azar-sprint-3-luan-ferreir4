@@ -17,19 +17,24 @@ body{
     background-color:var(--color-primary);
     color: var(--color-font-primary);
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 1.5rem;
-}
-.highContainer__title{
-    max-width: 250px;
-    margin: 40px auto;
+    font-size: 1.3rem;
 }
 .hidden{
     display: none;
 }
+
+
 .highContainer{
-    width: 100vw;
     text-align: center;
 }
+
+.highContainer__title{
+    width: 250px;
+    margin: 40px auto;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-details-secundary);
+}
+
 
 .container{
     width: 95vw;
@@ -61,7 +66,7 @@ body{
     background-color: var(--color-bg-buttonActivated);
 }
 
-.bttnsStyle--player:focus{
+.bttnsStylefocus{
     background-color: var(--color-bg-buttonActivated);
 
     transform: translateY(6px);
@@ -109,10 +114,9 @@ i{
 
 .lowContainer{
     position: absolute;
-    left: 0%;
-    right: 0%;
+    left: 0;
+    right: 0;
     bottom: 2%;
-   
     text-align: center;
 }
 
@@ -124,7 +128,7 @@ i{
 
 @media (min-width: 800px) {
     .highContainer__title{
-    max-width: 250px;
+    width: 480px;
     margin: 40px auto;
     }
     .flex{
@@ -136,8 +140,12 @@ i{
         margin-top: 19px;
     }
 
-    .rContainer{
-        margin-top: 40px;
+    .container--result{
+        width: 300px;
+        margin-top: 30px;
+        padding: 10px;
         font-size: 3rem;
+        
+        text-decoration: underline;
     }
 }
